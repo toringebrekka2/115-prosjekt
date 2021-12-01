@@ -17,7 +17,7 @@
                 $hashetPassord = password_hash($_POST['passord'], PASSWORD_DEFAULT);
 
                 $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
-                $spørring = "UPDATE medlem SET passord = '";
+                $spørring = "UPDATE leder SET passord = '";
                 $spørring .= $hashetPassord;
                 $spørring .= "' WHERE brukernavn = '";
                 $spørring .= $_POST['brukernavn'];
@@ -25,6 +25,8 @@
 
                 if($tilkobling->query($spørring)) {
                     echo "Passordet ditt ble lagret.";
+                    header("Location: login.php");
+                    exit();
                 } else {
                     echo "Det skjedde en feil. Passordet ditt ble ikke lagret.";
                     echo $spørring;
@@ -33,6 +35,5 @@
             }
 
         ?><br><br>
-        <a href="index.html">Til startsiden</a>
     </body>
 </html>

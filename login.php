@@ -13,12 +13,12 @@
             <input type="password" placeholder="Skriv inn ditt passord..." name="passord" required><br><br>
             <input type="submit" value="Logg inn" name="logginn">
         </form>
-        <p>Har du ikke passord? Lag et :<a href="lagpassord.php">her</a></p>
+        <p>Har du ikke passord? Lag et <a href="lagpassord.php">her</a></p>
 
         <?php
             if(isset($_POST['logginn'])) {
                 $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
-                $spørring = "SELECT fornavn, passord FROM leder WHERE brukernavn = '";
+                $spørring = "SELECT navn, passord FROM leder WHERE brukernavn = '";
                 $spørring .= $_POST['brukernavn'];
                 $spørring .= "';";
                 $resultat = $tilkobling->query($spørring);
@@ -28,18 +28,13 @@
                 if(password_verify($_POST['passord'], $dbPassord)) {
                     session_start();
                     $_SESSION['bruker']['innlogget'] = true;
-                    $_SESSION['bruker']['fornavn'] = $rad['fornavn'];
+                    $_SESSION['bruker']['navn'] = $rad['navn'];
                     header("Location: index.php");
                     exit();
                 } else {
                     echo "Brukernavn eller passord er ikke riktig...";
                 }
             }
-
-            $resultat->close();
-            mysqli_close($tilkobling);
-
         ?><br><br>
-        <a href="index.html">Til startsiden</a>
     </body>
 </html>
