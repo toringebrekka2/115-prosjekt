@@ -13,11 +13,12 @@
             <input type="password" placeholder="Skriv inn ditt passord..." name="passord" required><br><br>
             <input type="submit" value="Logg inn" name="logginn">
         </form>
+        <p>Har du ikke passord? Lag et :<a href="lagpassord.php">her</a></p>
 
         <?php
             if(isset($_POST['logginn'])) {
                 $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
-                $spørring = "SELECT fornavn, passord FROM medlem WHERE brukernavn = '";
+                $spørring = "SELECT fornavn, passord FROM leder WHERE brukernavn = '";
                 $spørring .= $_POST['brukernavn'];
                 $spørring .= "';";
                 $resultat = $tilkobling->query($spørring);
