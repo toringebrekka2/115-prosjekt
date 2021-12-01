@@ -3,6 +3,7 @@
         private $navn;
         private $ansvarlig;
         private $datoTid;
+        //id?
 
         function setNavn($navn) {
             $this->$navn = $navn;

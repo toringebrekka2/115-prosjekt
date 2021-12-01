@@ -11,7 +11,7 @@
                 header("Location: login.php");
                 exit();
             }
-            echo "<h1>Velkommen inn!</h1>";
+            echo "<h1>Neo Ungdomsklubb - medlemsoversikt</h1>";
         ?>
     </body>
 </html>
