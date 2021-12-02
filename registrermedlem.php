@@ -13,7 +13,7 @@
             }
             echo "<h1>Registrer nytt medlem</h1>";
         ?>
-        <form action="m6_oppgave2.php" method="post">
+        <form action="registrermedlem.php" method="post">
         Fornavn: <input type="text" name="fornavn" maxlength="50" required><br>
         Etternavn: <input type="text" name="etternavn" maxlength="50" required><br>
         Adresse: <input type="text" name="adresse" maxlength="50" required><br>
