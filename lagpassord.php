@@ -3,6 +3,7 @@
     <head>
         <title>Lag passord </title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="css/white.css">
     </head>
     <body>
         <h2>Lag passord</h2>

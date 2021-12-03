@@ -3,6 +3,7 @@
     <head>
         <title>Medlemsystem</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="css/white.css">
     </head>
     <body>
         <?php
