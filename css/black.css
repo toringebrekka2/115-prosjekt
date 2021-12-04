@@ -3,7 +3,7 @@
 }
 
 body {
-  background: url(/is217/design1/site/img/bg_pattern.png);
+  background: url('../is217/design1/site/img/bg_pattern.png');
   color: #eee;
   font: 1em 'PT Sans', sans-serif;
 }
