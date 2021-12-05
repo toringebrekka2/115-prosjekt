@@ -3,7 +3,7 @@
     <head>
         <title>Medlemsystem</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="css/white.css">
+        <link rel="stylesheet" href="css/black.css">
     </head>
     <body>
         <?php
@@ -18,10 +18,6 @@
         <h1>Neo Ungdomsklubb - medlemsoversikt</h1>
         <br><br>
         <p>Registrer nytt medlem <a href="registrermedlem.php">her.</a></p>
-        
-        <form>
-            <input type="button" name="loggut" value="Logg ut">
-        </form>
-        
+        <a id="loggut-knapp" href="logout.php">Logg ut</a>
     </body>
 </html>

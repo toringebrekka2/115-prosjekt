@@ -3,7 +3,7 @@
 }
 
 body {
-  background: url('../is217/design1/site/img/bg_pattern.png');
+  background: url('img/bg_pattern.png');
   color: #eee;
   font: 1em 'PT Sans', sans-serif;
 }
@@ -78,4 +78,10 @@ body {
     border-bottom: 2px solid #4EC6DE;
     padding-bottom: .5em;
   }
+
+#loggut-knapp {
+  float: right; 
+  padding-right: 70px;
+  color:white;
+}
 }
