@@ -14,6 +14,13 @@
             }
             echo "<h1>Registrer nytt medlem</h1>";
         ?>
+        <div class="nav-bar">
+            <a class="active" href="index.php">Hjem</a>
+            <a href="#">Vis alle</a>
+            <a href="#">Sorter</a>
+            <a href="registrermedlem.php">Registrer</a>
+            <a href="logout.php">Logg ut</a>
+        </div><br><br>
         <form action="registrermedlem.php" method="post">
         Fornavn: <input type="text" name="fornavn" maxlength="50" required><br>
         Etternavn: <input type="text" name="etternavn" maxlength="50" required><br>

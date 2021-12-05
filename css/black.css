@@ -78,10 +78,10 @@ body {
     border-bottom: 2px solid #4EC6DE;
     padding-bottom: .5em;
   }
+}
 
 #loggut-knapp {
   float: right; 
   padding-right: 70px;
   color:white;
-}
 }
