@@ -18,16 +18,10 @@
         <h1>Neo Ungdomsklubb - medlemsoversikt</h1>
         <br><br>
         <p>Registrer nytt medlem <a href="registrermedlem.php">her.</a></p>
-        <p style="align-content: right">
-            <form>
-                <input type="button" name="loggut" value="Logg ut">
-            </form>
-        </p>
-        <?php
-            if(isset($_POST['loggut'])) {
-                $_SESSION['bruker']['innlogget'] = false;
-                sjekkInnlogget();
-            }
-        ?>
+        
+        <form>
+            <input type="button" name="loggut" value="Logg ut">
+        </form>
+        
     </body>
 </html>
