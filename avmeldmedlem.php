@@ -14,7 +14,22 @@
             }
             echo "<h1>Avmeld medlem</h1>";
             include "navbar.php";
-
+        ?>
+        <br><br><form>
+            Skriv inn ID på medlemmet du vil slette: <input type="number" name="id" required>
+            <input type="submit" name="submit" value="Ok">
+        </form>
+        <?php
+            $id = $_POST['id'];
+            $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
+            $sjekkForRegAktivitet = "SELECT * FROM medlemaktivitet WHERE medlem = $id;";
+            $res1 = $tilkobling->query($sjekkForRegAktivitet);
+            if (empty($res1)) {
+                $tilkobling->query("DELETE FROM medlem WHERE id = $id;");
+            } else {
+                $tilkobling->query("DELETE FROM medlemaktivitet WHERE medlem = $id;");
+                $tilkobling->query("DELETE FROM medlem WHERE id = $id;");
+            }
         ?>
 </body>
 </html>

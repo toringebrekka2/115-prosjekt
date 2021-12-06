@@ -18,7 +18,7 @@
 
         <?php
             if(isset($_POST['logginn'])) {
-                $tilkobling = new mysqli("localhost", "root", "Passord123", "medlemdatabase");
+                $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
                 $spørring = "SELECT navn, passord FROM leder WHERE brukernavn = '";
                 $spørring .= $_POST['brukernavn'];
                 $spørring .= "';";
