@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Avmeld medlem</title>
+        <title>Registrer rolle</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/white.css">
     </head>
@@ -12,7 +12,7 @@
                 header("Location: login.php");
                 exit();
             }
-            echo "<h1>Avmeld medlem</h1>";
+            echo "<h1>Registrer rolle på medlem</h1>";
             include "navbar.php";
 
         ?>

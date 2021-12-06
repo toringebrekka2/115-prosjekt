@@ -17,7 +17,7 @@
             if(isset($_POST['lagpassord'])) {
                 $hashetPassord = password_hash($_POST['passord'], PASSWORD_DEFAULT);
 
-                $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
+                $tilkobling = new mysqli("localhost", "root", "Passord123", "medlemdatabase");
                 $spørring = "UPDATE leder SET passord = '";
                 $spørring .= $hashetPassord;
                 $spørring .= "' WHERE brukernavn = '";
