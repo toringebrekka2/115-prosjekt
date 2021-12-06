@@ -8,13 +8,27 @@
     <body>
         <h1> Medlemsoversikt </h1>
         <?php include 'navbar.php'; ?>
-        <form action="registrermedlem.php" method="post">
+        <form action="visning.php" method="post">
         <label for="kontigent">Sorter etter kontigent:</label>
         <select name="kontigent" id="kontigent">
-        <option value="Tom"></option>    
+        <option value="Tom1"></option>    
         <option value="Betalt">Betalt</option>
         <option value="IkkeBetalt">Ikke Betalt</option>
     </select>
+    <br>
+    <input type="submit" name = "submit1" value="Sortér">
+</form>
+
+<form action="visning.php" method="post">
+        <label for="medlemsiden">Sorter etter innemeldingsdato:</label>
+        <select name="medlemsiden" id="medlemsiden">
+        <option value="Tom2"></option>    
+        <option value="Synkende">Synkende</option>
+        <option value="Økende">Økende</option>
+    </select>
+    <br>
+    <input type="submit" name = "submit2" value="Sortér">
+</form>
     <?php
     if(!isset($_SESSION['bruker']['innlogget']) || $_SESSION['bruker']['innlogget'] !== true) {
         header("Location: login.php");
@@ -25,7 +39,31 @@
         die("Connection failed: " . $conn->connect_error);
       }
         
-    $sql = "SELECT id, fornavn, etternavn, adresse, postnr, mobilnr, epost, fødselsdato, kjønn, interesser, medlemsiden, kontigentstatus FROM medlem";
+    $check = "SELECT id, fornavn, etternavn, adresse, postnr, mobilnr, epost, fødselsdato, kjønn, interesser, medlemsiden, kontigentstatus FROM medlem";
+    $sql = $check;
+
+    if (isset($_POST['submit2']) && !isset($_POST['submit1']){
+        if ($_POST['medlemsiden'] == 'Synkende'){
+        $sql .= " ORDER BY medlemsiden DESC";
+        }
+        if ($_POST['medlemsiden'] == 'Økende'){
+        $sql .= " ORDER BY medlemsiden ASC";
+        }
+        } else $sql = $check;
+   
+    if (isset($_POST['submit1']) && !isset($_POST['submit2'])){
+        if ($_POST['kontigent'] == 'Betalt'){
+        $sql .= " ORDER BY kontigentstatus";
+        echo $sql;
+        }
+        if ($_POST['kontigent'] == 'IkkeBetalt'){
+        $sql .= " ORDER BY kontigentstatus DESC"; 
+        echo $sql;
+        }
+        } else $sql = $check;
+
+
+
     $result = $conn->query($sql);
     echo "
     <table>
