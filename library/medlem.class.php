@@ -51,17 +51,18 @@
                 $regMedlemQuery .= $this->kontigentStatus;
                 $regMedlemQuery .= "');";
 
+            
             //hvis queryen returnerer true (vellykket) gis det beskjed om, hvis ikke gis det beskjed om at noe gikk galt.
             if($tilkobling->query($regMedlemQuery)) {
+                $medlemID = $tilkobling->insert_id;
                 foreach($this->aktiviteter as $value) {
-                    $tilkobling->query("UPDATE medlemaktivitet SET medlem = 'medlemID', aktivitet = (SELECT id FROM aktivitet WHERE aktivitetsnavn = $value);");
+                    $tilkobling->query("UPDATE medlemaktivitet SET medlem = $medlemID, aktivitet = (SELECT id FROM aktivitet WHERE aktivitetsnavn = $value);");
                 }
                 echo "Medlemmet " . $this->fornavn . " " . $this->etternavn . " ble registrert!";
             } else {
                 echo "Det skjedde en feil - medlemmet ble ikke registrert.";
             }
-
-            mysqli_close($tilkobling);
+            
         }
     }
 ?>

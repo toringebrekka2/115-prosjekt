@@ -14,6 +14,7 @@
             }
             echo "<h1>Registrer nytt medlem</h1>";
         ?>
+
         <div class="nav-bar">
             <a class="active" href="index.php">Hjem</a>
             <a href="#">Vis alle</a>
@@ -21,6 +22,7 @@
             <a href="registrermedlem.php">Registrer</a>
             <a href="logout.php">Logg ut</a>
         </div><br><br>
+
         <form action="registrermedlem.php" method="post">
         Fornavn: <input type="text" name="fornavn" maxlength="50" required><br>
         Etternavn: <input type="text" name="etternavn" maxlength="50" required><br>
@@ -41,7 +43,9 @@
         Medlem siden: <input type="date" min="2000-01-01" name="medlemsiden" required><br>
         Kontigentstatus: <input type="text" name="kstatus" maxlength="50" required><br><br>
         <input type="submit" name="registrer" value="Registrer">
+
         <?php
+        require("library/medlem.class.php");
         if(isset($_POST['registrer'])) {
             $aktiviteter = array();
             if(isset($_POST['aktiviteter1'])){
@@ -62,6 +66,7 @@
             if (isset($_POST['aktiviteter6'])) {
                 $aktiviteter[] = $_POST['aktiviteter6'];
             }
+            
             $nyttMedlem = new Medlem($_POST['fornavn'], $_POST['etternavn'], $_POST['adresse'], $_POST['postnr'], $_POST['mobilnr'], $_POST['epost'], $_POST['fdato'], $_POST['kjønn'], $_POST['interesser'], $aktiviteter, $_POST['medlemsiden'], $_POST['kstatus']);
             $nyttMedlem->registrerMedlem();
         }
