@@ -22,7 +22,7 @@
         }
 
         function registrerMedlem() {
-            $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
+            $tilkobling = new mysqli("localhost", "root", "Passord123", "medlemdatabase");
             $regMedlemQuery = "
             INSERT INTO medlem 
                 (id, fornavn, etternavn, adresse, postnr, mobilnr, epost, fødselsdato, kjønn, interesser, medlemsiden, kontigentstatus)
@@ -49,13 +49,17 @@
                 $regMedlemQuery .= $this->medlemSiden;
                 $regMedlemQuery .= "', '"; 
                 $regMedlemQuery .= $this->kontigentStatus;
-                $regMedlemQuery .= "');";
+                $regMedlemQuery .= "'); ";
 
             //hvis queryen returnerer true (vellykket) gis det beskjed om, hvis ikke gis det beskjed om at noe gikk galt.
             if($tilkobling->query($regMedlemQuery)) {
-                foreach($this->aktiviteter as $value) {
-                    $tilkobling->query("UPDATE medlemaktivitet SET medlem = 'medlemID', aktivitet = (SELECT id FROM aktivitet WHERE aktivitetsnavn = $value);");
-                }
+        foreach($this->aktiviteter as $value) {
+        $mid = intval(mysqli_insert_id($tilkobling));   
+        echo $mid . " " . $value;
+            $tilkobling->query("INSERT INTO medlemaktivitet (medlemID, aktivitet) SELECT (SELECT id FROM medlem WHERE id = $mid), (SELECT id FROM aktivitet WHERE aktivitetsnavn = '$value');");
+            //$tilkobling->query("UPDATE medlemaktivitet SET medlem = 'medlemID', aktivitet = (SELECT id FROM aktivitet WHERE aktivitetsnavn = $value);");
+        }
+
                 echo "Medlemmet " . $this->fornavn . " " . $this->etternavn . " ble registrert!";
             } else {
                 echo "Det skjedde en feil - medlemmet ble ikke registrert.";
