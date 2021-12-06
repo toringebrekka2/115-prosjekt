@@ -6,8 +6,9 @@
         <link rel="stylesheet" href="css/white.css">
     </head>
     <body>
+    <h1>Neo Ungdomsklubb - medlemsoversikt</h1>
         <?php
-            session_start();
+            include 'navbar.php';
             function sjekkInnlogget() {
                 if(!isset($_SESSION['bruker']['innlogget']) || $_SESSION['bruker']['innlogget'] !== true) {
                     header("Location: login.php");
@@ -15,14 +16,7 @@
                 }
             }
         ?>
-        <h1>Neo Ungdomsklubb - medlemsoversikt</h1>
-        <div class="nav-bar">
-            <a class="active" href="index.php">Hjem</a>
-            <a href="#">Vis alle</a>
-            <a href="#">Sorter</a>
-            <a href="registrermedlem.php">Registrer</a>
-            <a href="logout.php">Logg ut</a>
-        </div>
+
+
         
-    </body>
-</html>
+    
