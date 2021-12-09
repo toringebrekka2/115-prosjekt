@@ -53,7 +53,7 @@
         die("Connection failed: " . $conn->connect_error);
       }
         
-    $check = "SELECT id, fornavn, etternavn, adresse, postnr, mobilnr, epost, fødselsdato, kjønn, interesser, medlemsiden, kontigentstatus FROM medlem";
+    $check = "SELECT id, fornavn, etternavn, adresse, postnr, mobilnr, epost, fødselsdato, kjønn, interesser, medlemsiden, kontigentstatus, Utmeldingsdato FROM medlem";
     $sql = $check;
 
     switch(!empty($_POST)){
@@ -130,6 +130,7 @@
         <th>Medlem siden</th>
         <th>Kontigentstatus</th>
         <th>Registrerte aktiviteter</th>
+        <th>Utmeldingsdato</th>
     </tr>";
 
 
@@ -155,6 +156,8 @@
         }
     }
                echo "</td>
+    
+    <td>" . $row['Utmeldingsdato'] . "</td>
     </tr>";
     }
 

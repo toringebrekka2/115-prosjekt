@@ -37,6 +37,7 @@
         Interesser:  <input type="text" name="interesser' . $row['id'] . '" value="' . $row['interesser'] .  '" maxlength="50">
         Medlem siden: <br> <input type="date" min="2000-01-01" value="' . $row['medlemsiden'] . '" name="medlemsiden' . $row['id'] . '" required><br>
         Kontigentstatus: <br> <input type="text" name="kontigentstatus' . $row['id'] . '" value="' . $row['kontigentstatus'] . '" maxlength="50" required>
+        
         Kursaktiviteter:<br>
         <input type="checkbox" name="aktiviteter1' . $row['id'] . '"  value="Gitarkurs">Gitarkurs<br>
         <input type="checkbox" name="aktiviteter2' . $row['id'] . '" value="Paintballturnering">Paintballturnering<br>
@@ -44,6 +45,7 @@
         <input type="checkbox" name="aktiviteter4' . $row['id'] . '" value="Volleyballturnering">Volleyballturnering<br>
         <input type="checkbox" name="aktiviteter5' . $row['id'] . '" value="Playstationkveld">Playstationkveld<br>
         <input type="checkbox" name="aktiviteter6' . $row['id'] . '" value="Kjøkkendag">Kjøkkendag<br>
+        <input type="checkbox" name="utmeld' . $row['id'] . '" value="Meld ut">Meld Ut<br>
         <input type="submit" form="' . $row['id'] . '" name="registrer' . $row['id'] . '" value="Registrer">
 </form>
 <br><br>';
@@ -92,6 +94,13 @@ if(!empty($_POST[$formname])){
 
     if (isset($_POST['medlemsiden' . $row['id'] . ''])){
         $msg[] = (compareAndUpdate($_POST['medlemsiden' . $row['id'] . ''], $row['medlemsiden'], "medlemsiden", $conn, $row['id']));
+    }
+    if (isset($_POST['utmeld' . $row['id'] . ''])){
+    $date = date('Y-m-d', time());
+    $theID = $row['id'];
+    echo $date . $theID;
+    $conn->query("UPDATE medlem SET Utmeldingsdato = '$date' WHERE id = $theID;");
+    $msg[] = $row['fornavn']  ." med medlemsid " . $row['id'] . "er nå blitt medlt ut";
     }
 
     if (isset($_POST['kontigentstatus' . $row['id'] . ''])){
