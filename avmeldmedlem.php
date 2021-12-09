@@ -23,13 +23,13 @@
             if(isset($_POST['submit'])) {
                 $id = $_POST['id'];
                 $tilkobling = new mysqli("localhost", "root", "root", "medlemdatabase");
-                $sjekkForRegAktivitet = "SELECT * FROM medlemaktivitet WHERE medlem = $id;";
+                $sjekkForRegAktivitet = "SELECT * FROM medlemaktivitet WHERE medlem = '" . $id . "';";
                 $res1 = $tilkobling->query($sjekkForRegAktivitet);
                 if (empty($res1)) {
-                    $tilkobling->query("DELETE FROM medlem WHERE id = $id;");
+                    $tilkobling->query("DELETE FROM medlem WHERE id = '" . $id . "';");
                 } else {
-                    $tilkobling->query("DELETE FROM medlemaktivitet WHERE medlem = $id;");
-                    $tilkobling->query("DELETE FROM medlem WHERE id = $id;");
+                    $tilkobling->query("DELETE FROM medlemaktivitet WHERE medlem = '" . $id . "';");
+                    $tilkobling->query("DELETE FROM medlem WHERE id = '" . $id . "';");
                 }
             }
         ?>

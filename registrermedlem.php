@@ -17,15 +17,15 @@
         ?>
         <br><br>
         <form action="registrermedlem.php" method="post">
-        Fornavn: <input type="text" name="fornavn" value="Testboy" maxlength="50" required><br>
-        Etternavn: <input type="text" name="etternavn" value="Testboysen" maxlength="50" required><br>
-        Adresse: <input type="text" name="adresse" value="Testboygate" maxlength="50" required><br>
-        Postnr: <input type="number" minlength="4" maxlength="4" name="postnr" value="1234" required><br>
-        Mobilnr: <input type="number" minlength="8" maxlength="12" name="mobilnr" value="12345"><br>
-        Epost: <input type="email" name="epost" value="test@boy.net" maxlength="40" required><br>
-        Fødselsdato: <input type="date" min="1900-01-01" name="fdato" value="1997-02-02" required><br>
-        Kjønn: <input type="text" name="kjønn" value="Yes" maxlength="10" required><br>
-        Interesser: <input type="text" name="interesser" value="No" maxlength="50"><br>
+        Fornavn: <input type="text" name="fornavn" maxlength="50" required><br>
+        Etternavn: <input type="text" name="etternavn" maxlength="50" required><br>
+        Adresse: <input type="text" name="adresse" maxlength="50" required><br>
+        Postnr: <input type="number" minlength="4" maxlength="4" name="postnr" required><br>
+        Mobilnr: <input type="number" minlength="8" maxlength="12" name="mobilnr"><br>
+        Epost: <input type="email" name="epost" maxlength="40" required><br>
+        Fødselsdato: <input type="date" min="1900-01-01" name="fdato" required><br>
+        Kjønn: <input type="text" name="kjønn" maxlength="10" required><br>
+        Interesser: <input type="text" name="interesser" maxlength="50"><br>
         Kursaktiviteter:<br>
         <input type="checkbox" name="aktiviteter1" value="Gitarkurs">Gitarkurs<br>
         <input type="checkbox" name="aktiviteter2" value="Paintballturnering">Paintballturnering<br>
@@ -33,8 +33,8 @@
         <input type="checkbox" name="aktiviteter4" value="Volleyballturnering">Volleyballturnering<br>
         <input type="checkbox" name="aktiviteter5" value="Playstationkveld">Playstationkveld<br>
         <input type="checkbox" name="aktiviteter6" value="Kjøkkendag">Kjøkkendag<br>
-        Medlem siden: <input type="date" min="2000-01-01" value="2000-02-02" name="medlemsiden" required><br>
-        Kontigentstatus: <input type="text" name="kstatus" value="Ja" maxlength="50" required><br><br>
+        Medlem siden: <input type="date" min="2000-01-01" name="medlemsiden" required><br>
+        Kontigentstatus: <input type="text" name="kstatus" maxlength="50" required><br><br>
         <input type="submit" name="registrer" value="Registrer">
 
         <?php

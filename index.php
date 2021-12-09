@@ -15,8 +15,7 @@
                     exit();
                 }
             }
+            echo "<br><br><h3>Velkommen til Neo Ungdomsklubbs lederside.</h3><h4>Bruk menyen over for å gjøre handlinger.</h4>"
         ?>
-
-
-        
-    
+    </body>
+</html>

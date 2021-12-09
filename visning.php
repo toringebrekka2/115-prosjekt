@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1> Medlemsoversikt </h1>
-        <?php include 'navbar.php'; ?>
+        <?php include 'navbar.php'; ?><br><br>
         <form action="visning.php" method="post">
         <label for="kontigent">Sortér etter kontigent:</label>
         <select name="kontigent" id="kontigent">
@@ -20,7 +20,7 @@
 </form>
 
 <form action="visning.php" method="post">
-        <label for="medlemsiden">Sortér etter innemeldingsdato:</label>
+        <label for="medlemsiden">Sortér etter innmeldingsdato:</label>
         <select name="medlemsiden" id="medlemsiden">
         <option value="Tom2"></option>
         <option value="Synkende">Synkende</option>
@@ -28,14 +28,14 @@
     </select>
     <br>
     <input type="submit" name = "submit2" value="Sortér">
-</form>
+</form><br><br>
     <?php
 
     if(!isset($_SESSION['bruker']['innlogget']) || $_SESSION['bruker']['innlogget'] !== true) {
         header("Location: login.php");
         exit();
                 }
-    $conn = new mysqli("localhost", "root", "Passord123", "medlemdatabase");
+    $conn = new mysqli("localhost", "root", "root", "medlemdatabase");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       }
