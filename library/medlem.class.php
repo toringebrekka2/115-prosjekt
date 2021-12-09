@@ -54,10 +54,21 @@
             
             //hvis queryen returnerer true (vellykket) gis det beskjed om, hvis ikke gis det beskjed om at noe gikk galt.
             if($tilkobling->query($regMedlemQuery)) {
+<<<<<<< HEAD
                 $mid = intval(mysqli_insert_id($tilkobling));
                 foreach($this->aktiviteter as $value) {
                     $tilkobling->query("INSERT INTO medlemaktivitet (medlemID, aktivitet) VALUES ((SELECT id FROM medlem WHERE id = $mid), (SELECT id FROM aktivitet WHERE aktivitetsnavn = '$value'));");
                 }
+=======
+        $mid = intval(mysqli_insert_id($tilkobling));   
+        foreach($this->aktiviteter as $value) {
+            $tilkobling->query(
+                "INSERT INTO medlemaktivitet (medlemID, aktivitet) 
+                VALUES ((SELECT id FROM medlem WHERE id = $mid), 
+                (SELECT id FROM aktivitet WHERE aktivitetsnavn = '$value'));");
+                    }
+
+>>>>>>> ad9d86c4fbfe536f2c2f0f79abda708631fc5d55
                 echo "Medlemmet " . $this->fornavn . " " . $this->etternavn . " ble registrert!";
             } else {
                 echo "Det skjedde en feil - medlemmet ble ikke registrert.";
