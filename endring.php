@@ -15,7 +15,10 @@
       die("Connection failed: " . $conn->connect_error);
     }
     
-    $sql = "SELECT id, fornavn, etternavn, adresse, postnr, mobilnr, epost, fødselsdato, kjønn, interesser, medlemsiden, kontigentstatus FROM medlem";
+    $sql = 
+    "SELECT *
+    FROM medlem";
+    
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()) {
@@ -35,18 +38,19 @@
         Medlem siden: <br> <input type="date" min="2000-01-01" value="' . $row['medlemsiden'] . '" name="medlemsiden' . $row['id'] . '" required><br>
         Kontigentstatus: <br> <input type="text" name="kontigentstatus' . $row['id'] . '" value="' . $row['kontigentstatus'] . '" maxlength="50" required>
         Kursaktiviteter:<br>
-        <input type="checkbox" name="aktiviteter1" value="Gitarkurs">Gitarkurs<br>
-        <input type="checkbox" name="aktiviteter2" value="Paintballturnering">Paintballturnering<br>
-        <input type="checkbox" name="aktiviteter3" value="Brettspilldag">Brettspilldag<br>
-        <input type="checkbox" name="aktiviteter4" value="Volleyballturnering">Volleyballturnering<br>
-        <input type="checkbox" name="aktiviteter5" value="Playstationkveld">Playstationkveld<br>
-        <input type="checkbox" name="aktiviteter6" value="Kjøkkendag">Kjøkkendag<br>
+        <input type="checkbox" name="aktiviteter1' . $row['id'] . '"  value="Gitarkurs">Gitarkurs<br>
+        <input type="checkbox" name="aktiviteter2' . $row['id'] . '" value="Paintballturnering">Paintballturnering<br>
+        <input type="checkbox" name="aktiviteter3' . $row['id'] . '" value="Brettspilldag">Brettspilldag<br>
+        <input type="checkbox" name="aktiviteter4' . $row['id'] . '" value="Volleyballturnering">Volleyballturnering<br>
+        <input type="checkbox" name="aktiviteter5' . $row['id'] . '" value="Playstationkveld">Playstationkveld<br>
+        <input type="checkbox" name="aktiviteter6' . $row['id'] . '" value="Kjøkkendag">Kjøkkendag<br>
         <input type="submit" form="' . $row['id'] . '" name="registrer' . $row['id'] . '" value="Registrer">
 </form>
 <br><br>';
 
 $msg = array();
 $formname = 'registrer' . $row['id'] .'';
+
 
 if(!empty($_POST[$formname])){
 
@@ -93,20 +97,81 @@ if(!empty($_POST[$formname])){
     if (isset($_POST['kontigentstatus' . $row['id'] . ''])){
         $msg[] = (@compareAndUpdate($_POST['kontigentstatus' . $row['id'] . ''], $row['kontigentstatus'], "kontigentstatus", $conn, $row['id']));
     }
+        $msg[] = (@findAk($row['id'], $_POST['aktiviteter1'  . $row['id'] . ''], $conn, "Gitarkurs"));
+        $msg[] = (@findAk($row['id'], $_POST['aktiviteter2'  . $row['id'] . ''], $conn, "Paintballturnering"));
+        $msg[] = (@findAk($row['id'], $_POST['aktiviteter3'  . $row['id'] . ''], $conn, "Brettspilldag"));
+        $msg[] = (@findAk($row['id'], $_POST['aktiviteter4'  . $row['id'] . ''], $conn, "Volleyballturnering"));
+        $msg[] = (@findAk($row['id'], $_POST['aktiviteter5'  . $row['id'] . ''], $conn, "Playstationkveld"));
+        $msg[] = (@findAk($row['id'], $_POST['aktiviteter6'  . $row['id'] . ''], $conn, "Kjøkkendag"));
+
+
     foreach($msg as $key => $val)
-    echo $val;
+    echo $val; 
 }
 
+}
+
+function findAk ($idMem, $post, $conn, $aktName){
+$dupe = false;
+$aktivitetcheck = $conn->query(
+    "SELECT id, aktivitetsnavn FROM aktivitet");
+$aktivitet = array();
+$aktivitetarr = array();
+while($row = $aktivitetcheck->fetch_assoc()) {
+    $aktivitetarr[$row['aktivitetsnavn']] = $row['id'];
+
+}
+
+
+$aktivitetNavn = $conn->query(
+    "SELECT  * FROM medlemaktivitet");
+
+
+while($row = $aktivitetNavn->fetch_assoc()) {
+    if (!empty($post)){
+       if($idMem == $row['medlemID'] && $aktivitetarr[$post] == $row['aktivitet']){
+        $dupe = true;   
+       }
+        }
+        }
+        if ($dupe != true) {
+            $aktivitet[$idMem] = $post;
+    }  else { 
+            return "Aktiviteten <b>$post</b> er allerede registrert på medlemsnummer <b>$idMem</b> <br>";
+    }
+
+foreach ($aktivitet as $key => $val){
+    $conn->query(
+        "INSERT INTO medlemaktivitet (medlemID, aktivitet)
+        VALUES ($key, (SELECT id FROM aktivitet WHERE aktivitetsnavn = '$val'))");
+}
+echo $post;
+if(empty($post)){
+   $check = $conn->query(
+        "DELETE from medlemaktivitet 
+        WHERE medlemID = '$idMem' 
+        AND aktivitet = '$aktivitetarr[$aktName]'");
+        if($conn->affected_rows > 0){
+        return "<b>$aktName</b> har blitt fjernet fra medlemsnummer <b>$idMem</b> <br>";
+        }
+}
+
+if($dupe == false && !empty($post)){
+return "Aktiviteten <b>$post</b> har blitt registrert på medlemsnummer <b>$idMem</b><br>";
+}
 }
 
 function compareAndUpdate ($input, $data, $columnname, $conn, $id){
     if ($input != $data){
         if (!empty($input) && !empty($data)) {
-        $conn->query("UPDATE medlem SET $columnname = '$input' WHERE id = $id;");
-        return "You have successfully insertet <b>$input</b> into <b>$columnname</b> while the data was <b>$data</b> <br>";
-        } else return "Could not insert, as data is missing for $columnname";
-    }
-}
+                $conn->query(
+                "UPDATE medlem SET $columnname = '$input' 
+                WHERE id = $id;");
+            }
+        
+        return "Du har endret <b>$input</b> i <b>$columnname</b> fra <b>$data</b> <br>";
+        }  elseif(empty($input)) { return "Could not insert, as data is missing for $columnname";}
+    } 
 ?>
 
     </body>
