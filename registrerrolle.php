@@ -16,7 +16,7 @@
             include "navbar.php";
         ?>
         <br><br>
-        <form action="registrerrolle.php" name="" method="get">
+        <form action="registrerrolle.php" method="get">
             Hvilket medlem vil du registrere en rolle på? <input type="number" name="id" placeholder="Skriv inn en ID..." required>
             <input type="submit" name="idsubmit" value="Finn medlem">
         </form><br>
@@ -44,7 +44,7 @@
             mysqli_close($tilkobling);
         ?>
         <?php if($fantMedlem) : ?>
-            <form action="registrerrolle.php" name="reg" method="post">
+            <form action="registrerrolle.php" method="post">
                 Leder: <input type="checkbox" name="Leder" value="Leder">
                 Nestleder: <input type="checkbox" name="Nestleder" value="Nestleder">
                 Kasserer: <input type="checkbox" name="Kasserer" value="Kasserer">
