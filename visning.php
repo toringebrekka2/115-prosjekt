@@ -30,7 +30,7 @@
     <input type="submit" name = "submit2" value="Sortér">
 </form>
 <form action="visning.php" method="post">
-        <label for="aktiviteter">Sortér etter innemeldingsdato:</label>
+        <label for="aktiviteter">Vis medlemmer meldt på aktiviteter:</label>
         <select name="aktiviteter" id="aktiviteter">
         <option value="Gitarkurs">Gitarkurs</option>
         <option value="Paintballturnering">Paintballturnering</option>
