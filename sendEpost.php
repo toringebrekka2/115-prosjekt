@@ -13,6 +13,10 @@
 <input type="number" placeholder="Fyll inn medlemsID..." name="id" required><br><br>
 <label for="melding">Melding</label>
 <input type="text" placeholder="Fyll inn melding til medlem..." name="msg" required><br><br>
+<label for="id">Epost du vil sende fra</label>
+<input type="text" placeholder="Fyll inn epost..." name="epostsend" required><br><br>
+<label for="melding">Melding</label>
+<input type="password" placeholder="Fyll inn passord..." name="passordsend" required><br><br>
 <input type="submit" value="Send inn" name="submit">
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
@@ -32,13 +36,12 @@ $conn = new mysqli("localhost", "root", "Passord123", "medlemdatabase");
 $sql = "SELECT * from medlem";
 $result = $conn->query($sql);
 while($row = $result->fetch_assoc()) {
-    if($row['id'] == $_POST['id']){
+    if($row['id'] == @$_POST['id']){
         $fnavn = $row['fornavn'];
         $enavn = $row['etternavn'];
         $epost = $row['epost'];
     }
 }
-echo $fnavn;
 if(isset($_POST['msg'])){
     $msg = $_POST['msg'] .  " Melding sendt til " .  $fnavn . "s konto fra Neo Ungdomsklubb";
 $mail = new PHPMailer(true);
@@ -52,13 +55,13 @@ try {
   $mail->SMTPSecure = "tls"; // påkrevd for Gmail
   $mail->Host = "smtp.gmail.com";
   $mail->Port = 587;
-  $mail->Username = "saurischia1@gmail.com";
-  $mail->Password = "Hemmelig1";
+  $mail->Username = @$_POST['epostsend'];
+  $mail->Password = @$_POST['passordsend'];
 
 
   $mld ="OI";
-  $mail->AddAddress('saurischia1@gmail.com', 'Information'); 
-  $mail->Subject = "saurischia1@gmail.com";
+  $mail->AddAddress($epost, 'Information'); 
+  $mail->Subject = "$epost";
   $mail->Body = $msg;
   $mail->send();
   echo "E-post er sendt";
