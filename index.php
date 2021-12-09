@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="css/white.css">
     </head>
     <body>
-    <h1>Neo Ungdomsklubb</h1>
+    <h1>Neo Ungdomsklubb - medlemsoversikt</h1>
         <?php
             include 'navbar.php';
             function sjekkInnlogget() {
