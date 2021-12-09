@@ -56,8 +56,7 @@
             if($tilkobling->query($regMedlemQuery)) {
                 $mid = intval(mysqli_insert_id($tilkobling));
                 foreach($this->aktiviteter as $value) {
-                    $tilkobling->query("INSERT INTO medlemaktivitet (medlem, aktivitet) VALUES ((SELECT id FROM medlem WHERE id = $mid), (SELECT id FROM aktivitet WHERE aktivitetsnavn = '$value'));");
-                    //$tilkobling->query("UPDATE medlemaktivitet SET medlem = 'medlemID', aktivitet = (SELECT id FROM aktivitet WHERE aktivitetsnavn = $value);");
+                    $tilkobling->query("INSERT INTO medlemaktivitet (medlemID, aktivitet) VALUES ((SELECT id FROM medlem WHERE id = $mid), (SELECT id FROM aktivitet WHERE aktivitetsnavn = '$value'));");
                 }
                 echo "Medlemmet " . $this->fornavn . " " . $this->etternavn . " ble registrert!";
             } else {
