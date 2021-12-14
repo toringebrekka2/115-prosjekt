@@ -4,9 +4,9 @@ Halvårsprosjekt i emnet IS-115 Webprogrammering i PHP
 
 Medlemssystem fra adminside (leder)
 
-For å bruke systemet, må du lage en konto i innloggingssystmet for så å logge deg inn.
+For å bruke systemet, må du lage en leder record i databasen, for så å lage et passord via linken på login.php og deretter logge inn.
 
-Databasen er tom for medlemmer, bruk den innebygde registreringsfunksjonen for å bruke applikasjonen
+Bruk den innebygde registreringsfunksjonen for å bruke applikasjonen
 
 
 - Se info om, endre info om, legge til og fjerne medlemmer.
